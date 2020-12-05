@@ -16,7 +16,7 @@ export class Piu{
 
     @ManyToOne(()=> User, (user) => user.pius)
     @JoinColumn({name: "user_id"})
-    owner: User;
+    user_id: string;
 
     @ManyToMany(()=> User, (user)=> (user.liked_pius, user.favorited_pius ))
     users_liked: User[];

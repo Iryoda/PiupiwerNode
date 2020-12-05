@@ -1,7 +1,6 @@
-import {Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
 import { Piu } from '../../Piu/entities/entity';
 import { User } from '../../User/entities/entity';
-
 
 @Entity('comments')
 export class Comment{

@@ -24,7 +24,7 @@ export class User{
     @Column()
     description: string;
 
-    @OneToMany( ()=> Piu, (piu) => piu.owner, {onDelete: "CASCADE", onUpdate:"CASCADE"})
+    @OneToMany( ()=> Piu, (piu) => piu.user_id, {onDelete: "CASCADE", onUpdate:"CASCADE"})
     pius: Piu[];   
     
     @OneToMany(()=> Comment, (comment) => comment.piu_id, {onDelete: "CASCADE"})

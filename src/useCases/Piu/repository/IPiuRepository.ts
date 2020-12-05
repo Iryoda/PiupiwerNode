@@ -1,14 +1,16 @@
-import { User } from "../../User/entities/entity";
+import { Piu } from "../entities/entity";
 
 export interface IPiuRepository{
-    id: string;
+		content: string;
+		user_id: string;
+}
+export interface CreatePiuDTO{
+	user_id: string;
 	content: string;
-	created_at: string;
-	
-    user_id: string;
-    
-	users_like: User[];
-	user_favorited: User[];
-	comments: Comment[];	
+}
+
+export interface IPiuRepository{
+	create(piu: CreatePiuDTO): Promise<any>;
+	findPiu(piu_id : string) : Promise<Piu | null>;
 }
 
