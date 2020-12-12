@@ -10,19 +10,19 @@ import ListPiusPropsService from '../../useCases/Piu/service/ListPiuProps';
 
 export default class PiuController{
     async index( request: Request, response: Response){
-        const {piu_id} = request.params;
+        const {id} = request.params;
+
+        const piu_id = id as string;
         
-        try {
+        try {  
+            const listPiu = new ListPiuService();
             if( piu_id){
-                const filtered = new ListPiuService();
-                const piu = await filtered.execute(piu_id);
-                
+                const piu = await listPiu.execute(piu_id);
+
                 return response.json(piu).status(200);
             }
             
-            const listPiu = new ListPiuService();
             const pius = await listPiu.execute();
-
             return response.json(pius);
 
         } catch (error) {

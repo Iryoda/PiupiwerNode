@@ -17,7 +17,7 @@ export default class ListPiuService
         .leftJoinAndSelect("pius.comments", "comments")
         .getMany();
 
-        return pius;
+        return pius || null;
     }
 
 }   

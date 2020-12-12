@@ -6,9 +6,11 @@ import UserController from './UserController';
 const userRoutes = express.Router();
 
 const userController = new UserController;
-
+//POST
 userRoutes.post('/', userController.create);
-userRoutes.get('/', userController.index);
+
+//USER
+userRoutes.get('/:id?', userController.index);
 userRoutes.delete('/', userController.deleteUser);
 
 export default userRoutes;

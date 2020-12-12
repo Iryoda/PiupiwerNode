@@ -1,11 +1,9 @@
 import {Request, Response} from 'express';
 import bcrypt from 'bcrypt';
 
-import {IUserDTO} from '../../useCases/User/repository/IUserRepository';
+
 import CreateUserService from '../../useCases/User/services/CreateUserService';
-import { userRepository } from '../../shared/container';
-import { getCustomRepository } from 'typeorm';
-import UserRepository from '../../useCases/User/repository/UserRepository';
+
 import { DeleteUserService } from '../../useCases/User/services/DeleteUserService';
 import ListUserService from '../../useCases/User/services/ListUserService';
 
@@ -41,22 +39,32 @@ export default class UserController{
          
     }
 
-
     async index ( request: Request, response: Response ) {
 
-        const {user_id} = request.params;
-        
-        try {
-            const listUserService  = new ListUserService;
+        const {id} = request.params;
 
-            if( user_id){
-            
-                const user = await listUserService.execute(user_id);
-                return response.status(200).json(user);
+        const user_id  = id as string;
+
+        try {
+            const listUserService  = new ListUserService();
+
+            if(user_id){
+                const user = await listUserService.execute(user_id as string);
+
+                if (user) {
+                    console.log("ok");
+                    return response.json(user);
+                }
+                else {
+                    console.log("fail");
+                    return response.status(200).send({"error" : "not founded"});
+                }
             }        
             else {
+                console.log('ok');
                 const users = await listUserService.execute();
-                return response.json(users);
+        
+                return response.status(200).json(users);
             }
             
             

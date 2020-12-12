@@ -1,4 +1,4 @@
-import {Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, Timestamp} from 'typeorm';
+import {Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, Timestamp} from 'typeorm';
 import { Comment } from '../../Comment/entities/entity';
 import { User } from '../../User/entities/entity';
 
@@ -18,11 +18,11 @@ export class Piu{
     @JoinColumn({name: "user_id"})
     user_id: string;
 
-    @ManyToMany(()=> User, (user)=> (user.liked_pius, user.favorited_pius ))
+    @ManyToMany(()=> User, (user)=> (user.liked_pius, user.favorited_pius ), { eager: true})
+    @JoinTable()
     users_liked: User[];
     users_favorited: User[];
 
-      
     @OneToMany(()=> Comment, (comment) => comment.piu_id, {onDelete: "CASCADE", onUpdate:"CASCADE"})
     comments: Comment[];
 

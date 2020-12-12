@@ -27,7 +27,7 @@ export default class ListPiusPropsService{
         .getOne();
         
         if( getPiu != null){
-            const user = await getPiu?.users_liked;
+            const user = getPiu.users_liked;
             return user;
 
         }
@@ -39,12 +39,12 @@ export default class ListPiusPropsService{
         const piuRepository = getCustomRepository(PiuRepository);
         //Procura no repositorio o Piu com o id pedido e retorna o array de usuarios que deram like
         const getPiu = await piuRepository.createQueryBuilder("pius")
-        .leftJoinAndSelect("piu.users_liked", "users")
+        .leftJoinAndSelect("pius.users_liked", "users")
         .where("pius.id = :id", {id: id})
         .getOne();
         
-        if( getPiu != null){
-            const user = getPiu?.users_liked;
+        if( getPiu){
+            const user = getPiu.users_liked;
             return user;
 
         }

@@ -15,7 +15,7 @@ export class Comment{
     @JoinColumn({name: "piu_id"})
     piu_id: string;
 
-    @ManyToOne(()=> User, (user) => user.commented_pius)
+    @ManyToOne(()=> User, (user) => user.comments)
     @JoinColumn({name:"user_id"})
     user_id: string;
 }
