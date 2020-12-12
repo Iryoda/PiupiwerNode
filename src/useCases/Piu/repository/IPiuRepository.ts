@@ -1,8 +1,14 @@
+import { User } from "../../User/entities/entity";
 import { Piu } from "../entities/entity";
 
-export interface IPiuRepository{
-		content: string;
-		user_id: string;
+export interface IPiu{
+	id: string;
+	content: string;
+	created_at: Date;
+	user_id: string;
+	users_liked: User[];
+	users_favorited: User[];
+	omments: Comment[];
 }
 export interface CreatePiuDTO{
 	user_id: string;

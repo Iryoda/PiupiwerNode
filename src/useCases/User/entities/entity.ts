@@ -3,7 +3,7 @@ import { Comment } from '../../Comment/entities/entity';
 import { Piu } from '../../Piu/entities/entity';
 
 
-@Entity()
+@Entity('users')
 export class User{
 
     @PrimaryGeneratedColumn('uuid')
@@ -24,6 +24,12 @@ export class User{
     @Column()
     description: string;
 
+    @Column()
+    age: string;
+
+    @Column()
+    password: string;
+    
     @OneToMany( ()=> Piu, (piu) => piu.user_id, {onDelete: "CASCADE", onUpdate:"CASCADE"})
     pius: Piu[];   
     

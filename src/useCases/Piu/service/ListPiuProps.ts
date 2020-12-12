@@ -13,7 +13,6 @@ interface IPiuLikers{
 }
 
 
-
 interface RequestBody {
     id: string;
 }
@@ -36,7 +35,7 @@ export default class ListPiusPropsService{
         
     }
 
-    async listPiuComments({id} : RequestBody) : Promise<User[] | null>{
+    async listPiuComments(id : string) : Promise<User[] | null>{
         const piuRepository = getCustomRepository(PiuRepository);
         //Procura no repositorio o Piu com o id pedido e retorna o array de usuarios que deram like
         const getPiu = await piuRepository.createQueryBuilder("pius")
@@ -45,7 +44,7 @@ export default class ListPiusPropsService{
         .getOne();
         
         if( getPiu != null){
-            const user = await getPiu?.users_liked;
+            const user = getPiu?.users_liked;
             return user;
 
         }
