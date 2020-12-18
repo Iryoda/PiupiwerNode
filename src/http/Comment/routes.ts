@@ -6,7 +6,7 @@ const commentRoutes = express.Router();
 const commentController = new CommentsController();
 
 //POST
-commentRoutes.post('/', commentController.create);
+commentRoutes.post('/:id', commentController.create);
 
 //GET
 commentRoutes.get('/:id?', commentController.index);

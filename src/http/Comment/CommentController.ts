@@ -5,10 +5,11 @@ import ListCommentService from '../../useCases/Comment/service/ListCommentServic
 
 export default class CommentsController{
     async create(request:Request, response: Response){
+        const {id} = request.params;
         const body = request.body ;
 
         const user_id = body.user_id as string;
-        const piu_id = body.piu_id as string;
+        const piu_id = id as string;
         const content = body.content as string;
 
         try {
@@ -51,13 +52,12 @@ export default class CommentsController{
         const ids = request.body;
         
         const comment_id = id as string;
-        const piu_id = ids.piu_id as string;
         const user_id = ids.user_id as string;
 
         try {
             const deleteComment = new DeleteCommentService();
-            const comment = await deleteComment.execute({piu_id, comment_id, user_id});
-            return response.json(comment);
+            const comment = await deleteComment.execute({comment_id, user_id});
+            return response.sendStatus(200);
             
         } catch (err) {
             return response.status(400).send({
