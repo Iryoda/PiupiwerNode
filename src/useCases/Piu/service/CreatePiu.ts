@@ -11,6 +11,7 @@ interface RequestBody{
 export default class CreatePiuService{
 
     async execute({user_id, content}: RequestBody ) : Promise<Piu | null> {
+        
         const piuRepository = getCustomRepository(PiuRepository);
         const newPiu = piuRepository.create({user_id, content});
         const piu = await piuRepository.save(newPiu);

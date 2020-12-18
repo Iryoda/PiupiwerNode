@@ -6,9 +6,9 @@ import { Piu } from "../entities/entity";
 class PiuRepository extends Repository<Piu>{
     async findPiu( piu_id : string) : Promise<Piu | null>{
         const searchedPiu = await this.createQueryBuilder("pius")
-        .leftJoinAndSelect("pius.likers", "users")   
-        .leftJoinAndSelect("pius.users_favorited", "user")
-        .leftJoinAndSelect("piu.comments", "comments")
+        .leftJoinAndSelect("pius.users_liked", "users_liked_pius_pius")   
+        .leftJoinAndSelect("pius.users_favorited", "users_favorited_pius_pius")
+        .leftJoinAndSelect("pius.comments", "comments")
         .where("pius.id = :id", {id: piu_id})
         .getOne();
 

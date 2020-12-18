@@ -14,16 +14,20 @@ export class Piu{
     @Column({type: 'timestamp', default:()=> 'CURRENT_TIMESTAMP'})
     created_at: Date;
 
-    @ManyToOne(()=> User, (user) => user.pius)
-    @JoinColumn({name: "user_id"})
+    @Column({ nullable: true })
     user_id: string;
 
-    @ManyToMany(()=> User, (user)=> (user.liked_pius, user.favorited_pius ), { eager: true})
-    @JoinTable()
-    users_liked: User[];
-    users_favorited: User[];
-
-    @OneToMany(()=> Comment, (comment) => comment.piu_id, {onDelete: "CASCADE", onUpdate:"CASCADE"})
+    @OneToMany(()=> Comment, (comment) => comment.piu, {onDelete: "CASCADE", onUpdate:"CASCADE"})
     comments: Comment[];
+    
+    @ManyToOne(()=> User, (user) => user.pius)
+    @JoinColumn({name: "user_id"})
+    user: string;
+
+    @ManyToMany(()=> User, (user)=> user.favorited_pius)
+    users_favorited: User[];
+    
+    @ManyToMany(()=> User, (user) => user.liked_pius)
+    users_liked: User[];
 
 }

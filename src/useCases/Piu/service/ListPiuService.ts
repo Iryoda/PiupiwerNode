@@ -12,12 +12,12 @@ export default class ListPiuService
             return piu || null;
         }
         const pius = await piuRepository.createQueryBuilder("pius")
-        .leftJoinAndSelect("pius.likers", "user")   
-        .leftJoinAndSelect("pius.users_favorited", "user")
+        .leftJoinAndSelect("pius.users_liked", "users_liked_pius_pius")   
+        .leftJoinAndSelect("pius.users_favorited", "users_favorited_pius_pius")
         .leftJoinAndSelect("pius.comments", "comments")
+        .orderBy('pius.id', 'ASC')
         .getMany();
-
-        return pius || null;
+        return pius;
     }
 
 }   

@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, Table, Timestamp} from "typeorm";
+import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
 export class CreatePiu1606961438850 implements MigrationInterface {
 

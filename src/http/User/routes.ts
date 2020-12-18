@@ -8,9 +8,13 @@ const userRoutes = express.Router();
 const userController = new UserController;
 //POST
 userRoutes.post('/', userController.create);
+userRoutes.post('/follow/:user_id', userController.followUser);
 
-//USER
+//GET
 userRoutes.get('/:id?', userController.index);
+userRoutes.get('/followers/:id', userController.indexFollower);
+
+//DELETE
 userRoutes.delete('/', userController.deleteUser);
 
 export default userRoutes;

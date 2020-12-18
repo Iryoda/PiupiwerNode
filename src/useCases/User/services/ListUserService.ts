@@ -12,11 +12,14 @@ export default class ListUserService {
             console.log(user);
             return user;
         } else {
-            const users = await userRep.find({
-                relations: ['pius', 'liked_pius','comments']
-            })
-
-            console.log(users);
+            const users = await userRep.createQueryBuilder('users')
+            .leftJoinAndSelect('users.pius','pius' )
+            .leftJoinAndSelect('users.comments', 'comments')
+            .leftJoinAndSelect('users.liked_pius', 'users_liked_pius_pius')
+            .leftJoinAndSelect('users.favorited_pius', 'users_favorited_pius_pius')
+            .leftJoinAndSelect('users.following', 'user_follow_user')
+            .getMany();
+            
             return users;
         }
         

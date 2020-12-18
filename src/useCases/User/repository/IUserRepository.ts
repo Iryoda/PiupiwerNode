@@ -10,6 +10,7 @@ export interface IUserDTO
 	description: string;
 	age: string;
 	password: string;
+	email: string;
 	
     pius?: Piu[];
     

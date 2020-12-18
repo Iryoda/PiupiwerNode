@@ -20,7 +20,7 @@ export default class DeleteCommentService{
             where: {id: piu_id}
         });
         if(piu){
-            const searchComment = piu?.comments.forEach(async(comment) => {
+            const searchComment = piu.comments.forEach(async(comment) => {
                 if( comment.id == comment_id && comment.user_id == user_id){
                     const index = piu.comments.indexOf(comment);
                     delete piu.comments[index];

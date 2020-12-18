@@ -11,4 +11,6 @@ commentRoutes.post('/', commentController.create);
 //GET
 commentRoutes.get('/:id?', commentController.index);
 
+//DELETE
+commentRoutes.delete('/:id', commentController.deleteComment);
 export default commentRoutes;

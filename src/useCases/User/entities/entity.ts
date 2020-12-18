@@ -1,7 +1,6 @@
-import {Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, Entity, JoinTable, ManyToMany,  OneToMany,    PrimaryGeneratedColumn} from 'typeorm';
 import { Comment } from '../../Comment/entities/entity';
 import { Piu } from '../../Piu/entities/entity';
-
 
 @Entity('users')
 export class User{
@@ -27,16 +26,32 @@ export class User{
     @Column()
     age: string;
 
-    @Column()
+    @Column({select : false})
     password: string;
+
+    @Column()
+    email: string;
     
-    @OneToMany( ()=> Piu, (piu) => piu.user_id, {onDelete: "CASCADE", onUpdate:"CASCADE"})
+    @OneToMany( ()=> Piu, (piu) => piu.user, {onDelete: "CASCADE", onUpdate:"CASCADE"})
     pius: Piu[];   
     
-    @OneToMany(()=> Comment, (comment) => comment.piu_id, {onDelete: "CASCADE",  onUpdate:"CASCADE"})
+    @OneToMany(()=> Comment, (comment) => comment.user, {onDelete: "CASCADE",  onUpdate:"CASCADE"})
     comments: Comment[];
-    
-    @ManyToMany(()=> Piu, (piu) => (piu.users_liked, piu.users_favorited), {onDelete: "CASCADE", onUpdate:"CASCADE"})
+ 
+    @ManyToMany(()=> Piu, (piu) => piu.users_liked, {onDelete: "CASCADE", onUpdate:"CASCADE"})
+    @JoinTable()
     liked_pius: Piu[];
+
+    @ManyToMany(()=> Piu, (piu) => piu.users_favorited, {onDelete: "CASCADE", onUpdate:"CASCADE"})
+    @JoinTable()
     favorited_pius: Piu[];
+
+    @ManyToMany(() => User, user => user.followers, {onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+    @JoinTable({ name: 'user_follow_user'})
+    following: User[];
+
+    @ManyToMany(() => User, user => user.following)
+    followers: User[];
+
+    
 }

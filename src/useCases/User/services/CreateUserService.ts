@@ -11,22 +11,33 @@ export default class CreateUserService {
             photo,
             description,
             age,
-            password} : IUserDTO)
+            password,
+            email} : IUserDTO)
         {
 
             const userRepository = getCustomRepository(UserRepository);
-            
-            const newUser = userRepository.create({
-                username, 
-                first_name, 
-                last_name, 
-                photo, 
-                description, 
-                age,
-                password});
 
-            const newser = await userRepository.save(newUser);
+            const checkUser = await userRepository.findOne({
+                where: {username : username}
+            })
 
-
+            if(!checkUser){
+                const newUser = await userRepository.create({
+                    username, 
+                    first_name, 
+                    last_name, 
+                    photo, 
+                    description, 
+                    age,
+                    password,
+                    email});
+                
+                const save = await userRepository.save(newUser);
+                return;
+            }
+            else {
+                throw 1;
+            }
         }
+          
 }

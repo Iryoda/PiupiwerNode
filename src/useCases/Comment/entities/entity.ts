@@ -11,11 +11,17 @@ export class Comment{
     @Column()
     content: string;
 
+    @Column()
+    user_id: string;
+
+    @Column()
+    piu_id: string;
+    
     @ManyToOne(()=> Piu, (piu)=> piu.comments)
     @JoinColumn({name: "piu_id"})
-    piu_id: string;
+    piu: string;
 
     @ManyToOne(()=> User, (user) => user.comments)
     @JoinColumn({name:"user_id"})
-    user_id: string;
+    user: string;
 }

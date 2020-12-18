@@ -7,7 +7,7 @@ export default class ListCommentService {
 
         const commentsRepository = getCustomRepository(CommentRepository);
 
-        if( id){
+        if(id){
             const comment = await commentsRepository.findComent(id);
             return comment;
         } else {
