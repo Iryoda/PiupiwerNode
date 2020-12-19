@@ -1,4 +1,4 @@
-import {Column, Entity, JoinTable, ManyToMany,  OneToMany,    PrimaryGeneratedColumn} from 'typeorm';
+import {Column, Entity, JoinColumn, JoinTable, ManyToMany,  OneToMany,    PrimaryGeneratedColumn} from 'typeorm';
 import { Comment } from '../../Comment/entities/entity';
 import { Piu } from '../../Piu/entities/entity';
 

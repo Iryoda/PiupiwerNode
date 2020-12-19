@@ -19,6 +19,16 @@ export default class CommentsController{
             return response.sendStatus(200);
 
         } catch (err) {
+            if( err = 1){
+                return response.status(404).send({
+                    error : "User not found"
+                })
+            }
+            if( err = 2){
+                return response.status(404).send({
+                    error : "Piu not found"
+                })
+            }
             return response.send({
                 "error" : err
             })
@@ -60,6 +70,17 @@ export default class CommentsController{
             return response.sendStatus(200);
             
         } catch (err) {
+            if( err == 1){
+                return response.status(404).send({
+                    error : "Comment not found"
+                })
+            }
+
+            if( err == 2){
+                return response.status(402).send({
+                    error : "User do not match"
+                })
+            }
             return response.status(400).send({
                 "error" : err
             })

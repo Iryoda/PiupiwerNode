@@ -24,7 +24,12 @@ export default class commentPiuService {
                 const commentRepository = getCustomRepository(CommentRepository);
                 const newComment = await commentRepository.create({user_id, piu_id, content});
                 const save = await commentRepository.save(newComment);
+            } else {
+                throw 2;
             }
+        }
+        else {
+            throw 1;
         }
     }
 }

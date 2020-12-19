@@ -34,11 +34,11 @@ export default class LikePiuService{
                         const save = await piuRepository.manager.save(piu);
                         return;
                     }
-                    else throw "User not found";
+                    else throw 1;
                 }
             });
     
-        } else throw "Piu not found";
+        } else throw 2;
     }
 }
 

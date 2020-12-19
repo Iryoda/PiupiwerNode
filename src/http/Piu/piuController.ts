@@ -19,6 +19,11 @@ export default class PiuController{
             return response.json(newPiu);
     
         } catch (error) {
+            if( error == 1){
+                return response.status(404).send({
+                    error: "User not found"
+                })
+            }
             return response.status(400).send({
                 "err" : error
             })
@@ -41,9 +46,9 @@ export default class PiuController{
             const pius = await listPiu.execute();
             return response.status(200).json(pius);
 
-        } catch (error) {
+        } catch (err) {
             return response.status(400).send({
-                "err" : error
+                "Error" : err
             })
         }
     }
@@ -56,8 +61,13 @@ export default class PiuController{
 
             return response.sendStatus(200);
         } catch (error) {
+            if( error == 1){
+                return response.status(404).send({
+                    error: "Piu not found"
+                })
+            }
             return response.status(400).send({
-                error : error
+                Error : error
             })
         }
     
@@ -73,6 +83,16 @@ export default class PiuController{
             
             return response.status(200).json(likePiu);
         } catch (error) {
+            if( error == 1){
+                return response.status(404).send({
+                    error: "User not found"
+                })
+            }
+            if( error == 2){
+                return response.status(404).send({
+                    error: "Piu not found"
+                })
+            }
             return response.status(400).send({
                 "Error": error
             })
@@ -89,6 +109,16 @@ export default class PiuController{
             
             return response.status(200).json(favoritePiu);
         } catch (error) {
+            if( error == 1){
+                return response.status(404).send({
+                    error: "User not found"
+                })
+            }
+            if( error == 2){
+                return response.status(404).send({
+                    error: "Piu not found"
+                })
+            }
             return response.status(400).send({
                 "Error": error
             })
@@ -105,8 +135,18 @@ export default class PiuController{
 
             return response.json(comments);
         }catch ( err ){
+            if( err == 1){
+                return response.status(404).send({
+                    error: "User not found"
+                })
+            }
+            if( err == 2){
+                return response.status(404).send({
+                    error: "Piu not found"
+                })
+            }
             return response.send({
-                "error" : err
+                "Error" : err
             })
         }
 

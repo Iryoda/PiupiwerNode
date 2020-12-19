@@ -20,8 +20,11 @@ export default class CreateUserService {
             const checkUser = await userRepository.findOne({
                 where: {username : username}
             })
+            const checkEmail = await userRepository.findOne({
+                where: {email : email}
+            })
 
-            if(!checkUser){
+            if(!checkUser && !checkEmail){
                 const newUser = await userRepository.create({
                     username, 
                     first_name, 

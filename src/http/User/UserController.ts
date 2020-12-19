@@ -37,7 +37,7 @@ export default class UserController{
         } catch (error) {
             if( error == 1){
                 return response.status(400).send({
-                    'error' : 'username already taken'
+                    Error: "Your username and email must be unique"
                 })
             }
             else{
@@ -127,8 +127,8 @@ export default class UserController{
         try {
             const listFollowerService = new ListUserFollowersService();
             const user = await listFollowerService.execute(id);
-            console.log( user);
-            return response.status(200).json(user);
+            if( user) return response.status(200).json(user.followers);
+            else response.status(404).json({ error : "User not found"}) 
         } catch (error) {
             return response.status(400).json({
                 "error" : error

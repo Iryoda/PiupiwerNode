@@ -21,6 +21,6 @@ export default class DeleteCommentService{
             return
         }
 
-        throw "Comment not found";
+        throw 1;
     }
 }

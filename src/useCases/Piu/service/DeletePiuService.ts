@@ -8,7 +8,7 @@ export class DeletePiuservice{
         .delete()
         .where('id = :id' , {id : piu_id})
         .execute();
-
+        
         return;
     }
 }
